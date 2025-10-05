@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Expense Tracker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Google Fonts for modern typography -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -377,7 +376,6 @@
       <h2>Recent Expenses</h2>
       
       <ul class="expenses-list" id="expensesList">
-        <!-- Expenses will be added here dynamically -->
         <div class="empty-state">
           <i class="fas fa-receipt"></i>
           <p>No expenses added yet. Start by adding your first expense above!</p>
@@ -397,12 +395,9 @@
       const totalAmount = document.getElementById('totalAmount');
       
       let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-      
-      // Render existing expenses
       renderExpenses();
       updateTotal();
-      
-      // Add new expense
+  
       expenseForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -426,11 +421,9 @@
         renderExpenses();
         updateTotal();
         
-        // Reset form
         expenseForm.reset();
       });
-      
-      // Delete expense
+    
       function deleteExpense(id) {
         expenses = expenses.filter(expense => expense.id !== id);
         saveExpenses();
@@ -438,7 +431,6 @@
         updateTotal();
       }
       
-      // Render expenses list
       function renderExpenses() {
         if (expenses.length === 0) {
           expensesList.innerHTML = `
@@ -473,18 +465,16 @@
         });
       }
       
-      // Update total amount
+   
       function updateTotal() {
         const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
         totalAmount.textContent = `₹${total.toFixed(2)}`;
       }
       
-      // Save expenses to localStorage
       function saveExpenses() {
         localStorage.setItem('expenses', JSON.stringify(expenses));
       }
       
-      // Get display name for category
       function getCategoryDisplayName(category) {
         const categoryMap = {
           food: 'Food',
@@ -497,9 +487,7 @@
         
         return categoryMap[category] || category;
       }
-      
-      // Make deleteExpense function available globally for onclick events
-      window.deleteExpense = deleteExpense;
+            window.deleteExpense = deleteExpense;
     });
   </script>
 </body>
